@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/dantesm5481/Desktop/Program Content/GitProject/QRTrackerMark/app/build/intermediates/exploded-aar/QRTrackerMark.libs/opencv/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="dd1220f75112d44fe66178c8826b37acef2e94c9">
+        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRTrackerMark/app/build/intermediates/pre-dexed/debug/QRTrackerMark.libs-opencv-unspecified_6dd5962d90cf4425dc2e2d4f28cf8e81bee399e5.jar" />
+    </item>
+
+</items>
