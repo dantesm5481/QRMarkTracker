@@ -44,6 +44,11 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
 
 
+
+
+
+    
+
     private CameraBridgeViewBase openCvCameraView;
     private CascadeClassifier cascadeClassifier;
     private Mat grayscaleImage;
