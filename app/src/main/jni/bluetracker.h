@@ -677,18 +677,23 @@ private: System::Void btnAnalysis_Click(System::Object^  sender, System::EventAr
 
 	txbDecodeResult->Clear();
 
-			// Todo 只需要這一行
+	// todo 只需要這一行
 	cvtColor((*imgC), matColor, COLOR_BGR2YCrCb); // 將色彩空間從RGB轉到YCrCb
+
+    //todo planes 分成  Y , Cr , Cb分別存於   planes[0],planes[1],planes[2]裡面，在本範例中 我們取 planes[2]的 br
 	split(matColor, planes); // 分離彩色通道
-	threshold(planes[2], matBin, 144, 255, THRESH_BINARY); //  Cb通道二值化，門檻值144
 
+	//todo 此處判定藍色筐的顏色界定 Cb的藍色值 144~255 只是此處的範粒
+	threshold(planes[2], matBin, 144, 255, THRESH_BINARY); //  Cb通道2，門檻值144。
 
+    //todo 取四個點 ，contours
+    vector<vector<cv::Point>> contours;
 
-			vector<vector<cv::Point>> contours;
 
 	findContours(matBin, contours, RETR_EXTERNAL, CHAIN_APPROX_NONE); //  只取外輪廓
 
 	// 隨機著色
+	//todo 此處照貼--------------------------- start
 	RNG rng(12345);
 	vector<vector<cv::Point>> poly(contours.size());
 	vector<vector<cv::Point>> marker;
@@ -716,12 +721,14 @@ private: System::Void btnAnalysis_Click(System::Object^  sender, System::EventAr
 			drawContours(matColor, poly, i, Scalar(255, 0, 0), 2, 8, vector<Vec4i>(), 0, cv::Point());
 		}
 	}
+	//todo 此處照貼--------------------------- End
 
-	//
+	//todo 忽略-------------start
 	array<PictureBox^>^ arrayPicBox = gcnew array<PictureBox^>(10);
 
 	arrayPicBox[0] = pbxQ01; arrayPicBox[1] = pbxQ02; arrayPicBox[2] = pbxQ03; arrayPicBox[3] = pbxQ04; arrayPicBox[4] = pbxQ05;
 	arrayPicBox[5] = pbxQ06; arrayPicBox[6] = pbxQ07; arrayPicBox[7] = pbxQ08; arrayPicBox[8] = pbxQ09; arrayPicBox[9] = pbxQ10;
+	//todo 忽略-------------End
 
 	for (int i = 0; i < 10; i++){
 		Mat z = Mat::zeros(80, 80, CV_8UC3);

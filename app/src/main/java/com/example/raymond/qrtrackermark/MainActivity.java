@@ -36,19 +36,12 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     static {
 
         if (!OpenCVLoader.initDebug()){
-            Log.v("Raymond","  :"+"  NO");
+            Log.v("Raymond","  :"+"NO");
         }
         else{
             Log.v("Raymond","  :"+"YES");
         }
     }
-
-
-    private CameraBridgeViewBase openCvCameraView;
-    private CascadeClassifier cascadeClassifier;
-    private Mat grayscaleImage;
-    private int absoluteFaceSize;
-
 
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -98,6 +91,17 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     }
 
 
+    private CameraBridgeViewBase openCvCameraView;
+    private CascadeClassifier cascadeClassifier;
+    private Mat grayscaleImage;
+    private int absoluteFaceSize;
+
+    private int num = 0;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,31 +129,29 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     }
 
     @Override
-    public void onCameraViewStopped() {
-
-    }
+    public void onCameraViewStopped() {}
 
     @Override
-    public Mat onCameraFrame(Mat mat) {// 整個畫面的 Call Back
+    public Mat onCameraFrame(Mat mat) {// 整個畫面的 Call Back perframe
+
+
+        Log.v("Raymond ", "  : "+" Raymond Test"+String.valueOf(num++));
+
         // Create a grayscale image
-        Imgproc.cvtColor(mat, grayscaleImage, Imgproc.COLOR_RGBA2RGB);
+        Imgproc.cvtColor(mat, grayscaleImage, Imgproc.COLOR_BGR2YCrCb);
 
 
         MatOfRect faces = new MatOfRect();
-
-
         // Use the classifier to detect faces
         if (cascadeClassifier != null) {
             cascadeClassifier.detectMultiScale(grayscaleImage, faces, 1.1, 2, 2,
                     new Size(absoluteFaceSize, absoluteFaceSize), new Size());
         }
 
-
         // If there are any faces found, draw a rectangle around it
         Rect[] facesArray = faces.toArray();
         for (int i = 0; i <facesArray.length; i++)
             Core.rectangle(mat, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
-
 
         return mat;
 
