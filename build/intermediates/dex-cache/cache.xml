@@ -2,11 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/dantesm5481/Desktop/Program Content/GitProject/QRTrackerMark/app/build/intermediates/exploded-aar/QRTrackerMark.libs/opencv/unspecified/jars/classes.jar"
+        jar="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
         jumboMode="false"
         revision="23.0.3"
-        sha1="dd1220f75112d44fe66178c8826b37acef2e94c9">
-        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRTrackerMark/app/build/intermediates/pre-dexed/debug/QRTrackerMark.libs-opencv-unspecified_6dd5962d90cf4425dc2e2d4f28cf8e81bee399e5.jar" />
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1_92bc6590fd1dc03269ade238294debc1416a53e8.jar" />
+    </item>
+    <item
+        jar="/Users/dantesm5481/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1_74185aadc16ff856948ca9aaea379156f5c19e40.jar" />
+    </item>
+    <item
+        jar="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/exploded-aar/QRMarkTracker.libs/opencv/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="82b8b466313ed171aa12df7c7b18e06a09cfea08">
+        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/pre-dexed/debug/QRMarkTracker.libs-opencv-unspecified_71c58c8863f24c4f07f4f052ac1fa8f1cee729c5.jar" />
+    </item>
+    <item
+        jar="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_b89f2b41f4c96a9801c1f0eae9dd47acfdc9690d.jar" />
+    </item>
+    <item
+        jar="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/Users/dantesm5481/Desktop/Program Content/GitProject/QRMarkTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.1.1_2bc6cb9c33d5ee7eea650fdc4250fe35784bbbed.jar" />
     </item>
 
 </items>

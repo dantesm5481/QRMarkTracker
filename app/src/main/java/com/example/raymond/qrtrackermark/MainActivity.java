@@ -34,6 +34,7 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
 
     static {
+
         if (!OpenCVLoader.initDebug()){
             Log.v("Raymond","  :"+"  NO");
         }
@@ -43,17 +44,10 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     }
 
 
-
-
-
-
-    
-
     private CameraBridgeViewBase openCvCameraView;
     private CascadeClassifier cascadeClassifier;
     private Mat grayscaleImage;
     private int absoluteFaceSize;
-
 
 
 
@@ -105,10 +99,6 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
 
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,8 +109,6 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         openCvCameraView = new JavaCameraView(this ,-1);
         openCvCameraView.setCvCameraViewListener(this);
         setContentView(openCvCameraView);
-
-
 
 
     }
@@ -142,9 +130,9 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     }
 
     @Override
-    public Mat onCameraFrame(Mat aInputFrame) {// 整個畫面的 Call Back
+    public Mat onCameraFrame(Mat mat) {// 整個畫面的 Call Back
         // Create a grayscale image
-        Imgproc.cvtColor(aInputFrame, grayscaleImage, Imgproc.COLOR_RGBA2RGB);
+        Imgproc.cvtColor(mat, grayscaleImage, Imgproc.COLOR_RGBA2RGB);
 
 
         MatOfRect faces = new MatOfRect();
@@ -160,10 +148,10 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         // If there are any faces found, draw a rectangle around it
         Rect[] facesArray = faces.toArray();
         for (int i = 0; i <facesArray.length; i++)
-            Core.rectangle(aInputFrame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
+            Core.rectangle(mat, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
 
 
-        return aInputFrame;
+        return mat;
 
     }
 
