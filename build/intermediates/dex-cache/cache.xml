@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="34aa5f25bba38a415a6ac1b1367b8c87ff006b00">
+        <dex dex="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_c680c3ff04c9dcdcd968fddbd221438e4b5062ee/classes.dex" />
+    </item>
+    <item
+        jar="/Users/toliya/Desktop/goodlife/adt-bundle-mac-x86_64-20140702/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.1.1_6dc8e460fc16975b2d8cdacd7c354bcb4b30f5f4/classes.dex" />
+    </item>
+    <item
+        jar="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ac885d85475046d3378fb2d5c2d84e93cc89a45d">
+        <dex dex="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_e4c648e880951eba3645b892f891205dde258b75/classes.dex" />
+    </item>
+    <item
+        jar="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.1.1_bb81d3c8c5a98aed16110f232cd77a1277f04763/classes.dex" />
+    </item>
+    <item
+        jar="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.1.1_aa3cc4d6ec435ec75c0c89c5b43fd7e41a0c5f7b/classes.dex" />
+    </item>
+    <item
+        jar="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/Users/toliya/Desktop/Programerdesign/GitProject/QRMarkerTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.1.1_d93f60db1f82fc39816772b8aa1c174c084dc951/classes.dex" />
+    </item>
+
+</items>
