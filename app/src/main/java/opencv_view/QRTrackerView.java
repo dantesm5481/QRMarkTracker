@@ -45,6 +45,8 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
     @Override
     public Mat onCameraFrame(Mat mat) {
 
+
+
         Log.v(" Raymond " , "   MAT : "+" mat"+String.valueOf(num++));
 
         return mat;

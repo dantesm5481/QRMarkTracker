@@ -13,8 +13,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IntentAction((Button) this.findViewById(R.id.facedecetor), Activity_FaceDetector.class);
-        IntentAction((Button)this.findViewById(R.id.QRTracker), Activity_QRTracker.class);
+//        IntentAction((Button) this.findViewById(R.id.facedecetor), Activity_FaceDetector.class);
+//        IntentAction((Button)this.findViewById(R.id.QRTracker), Activity_QRTracker.class);
+
+
+
+
 
     }
 
