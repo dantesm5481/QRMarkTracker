@@ -6,11 +6,7 @@ package com.example.raymond.qrtrackermark;
 public class BlueTracker {
 
 
-    static {
-
-        System.loadLibrary("bluetrackJNI");
-    }
-
+    static {System.loadLibrary("bluetrackJNI");}
     private native void btnAnalysis_Click();
 
 }

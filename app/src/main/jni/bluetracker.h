@@ -683,7 +683,7 @@ private: System::Void btnAnalysis_Click(System::Object^  sender, System::EventAr
     //todo planes 分成  Y , Cr , Cb分別存於   planes[0],planes[1],planes[2]裡面，在本範例中 我們取 planes[2]的 br
 	split(matColor, planes); // 分離彩色通道
 
-	//todo 此處判定藍色筐的顏色界定 Cb的藍色值 144~255 只是此處的範粒
+	//todo 此處判定藍色筐的顏色界定 Cb的藍色值 144~255 只是此處的範例
 	threshold(planes[2], matBin, 144, 255, THRESH_BINARY); //  Cb通道2，門檻值144。
 
     //todo 取四個點 ，contours
