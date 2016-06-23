@@ -1,11 +1,7 @@
 package com.example.raymond.qrtrackermark;
-
 import android.os.Bundle;
-
 import com.example.raymond.qrtrackermark.basic_view_activity.BasicActivity;
-
 import org.opencv.core.Mat;
-
 import opencv_view.FaceDetectorView;
 
 /**

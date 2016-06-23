@@ -1,5 +1,8 @@
-LOCAL_PATH :=$(call my-dir)
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
-LOCAL_MODULE :=MyLibrary
-LOCAL_SRC_FILES :=MyLibrary.cpp
+
+LOCAL_MODULE := myJNI
+LOCAL_SRC_FILES := myJNI.cpp
+
 include $(BUILD_SHARED_LIBRARY)
