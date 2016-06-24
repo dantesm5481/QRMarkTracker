@@ -1,6 +1,7 @@
 package com.example.raymond.qrtrackermark;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.raymond.qrtrackermark.basic_view_activity.BasicActivity;
 
@@ -20,8 +21,18 @@ public class Activity_QRTracker extends BasicActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        trackerView = new QRTrackerView(this, -1 ,new Mat());
-        setContentView(trackerView);
+        try {
+
+            trackerView = new QRTrackerView(this, -1, new Mat());
+            setContentView(trackerView);
+
+            Toast.makeText(this ,"成功進入 openCV Camera",Toast.LENGTH_LONG).show();
+
+
+        }catch (Exception e){
+
+            Toast.makeText(this , e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
 

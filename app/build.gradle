@@ -11,15 +11,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        ndk{
-            moduleName "MyLibrary"
-        }
-
-        sourceSets.main{
-            jni.srcDirs=[]
-            jniLibs.srcDir "src/main/libs"
-        }
-
     }
 
 

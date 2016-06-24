@@ -60,6 +60,7 @@ public class FaceDetectorView extends BasicOpenCV implements CameraBridgeViewBas
     @Override
     public Mat onCameraFrame(Mat mat) {
         // Create a grayscale image
+
         Imgproc.cvtColor(mat, grayscaleImage, Imgproc.COLOR_BGR2YCrCb);
 
 
