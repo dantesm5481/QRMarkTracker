@@ -20,28 +20,28 @@ public class MainActivity extends BasicActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
 
-
-
-        try {
-            IntentAction((Button)this.findViewById(R.id.facedecetor), Activity_FaceDetector.class);
-            IntentAction((Button)this.findViewById(R.id.QRTracker), Activity_QRTracker.class);
-
-            Toast.makeText(this , "成功跳頁",Toast.LENGTH_LONG).show();
-        }catch (Exception e){
-
-            Toast.makeText(this , "開啟失敗"+ e.getMessage(),Toast.LENGTH_LONG).show();
-
-        }
 
 
 //        try {
-////            autoIntent(Activity_QRTracker.class);
+//            IntentAction((Button)this.findViewById(R.id.facedecetor), Activity_FaceDetector.class);
+//            IntentAction((Button)this.findViewById(R.id.QRTracker), Activity_QRTracker.class);
+//
 //            Toast.makeText(this , "成功跳頁",Toast.LENGTH_LONG).show();
 //        }catch (Exception e){
-//            Toast.makeText(this , e.getMessage(),Toast.LENGTH_LONG).show();
+//
+//            Toast.makeText(this , "開啟失敗"+ e.getMessage(),Toast.LENGTH_LONG).show();
+//
 //        }
+
+
+        try {
+            autoIntent(Activity_QRTracker.class);
+            Toast.makeText(this , "成功跳頁",Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            Toast.makeText(this , e.getMessage(),Toast.LENGTH_LONG).show();
+        }
 
     }
 

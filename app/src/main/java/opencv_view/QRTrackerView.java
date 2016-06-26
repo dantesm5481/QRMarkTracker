@@ -30,7 +30,7 @@ import opencv_view.BasicOpenCVView.BasicOpenCV;
 public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.CvCameraViewListener {
 
     private CascadeClassifier cascadeClassifier;
-    private Mat grayscaleImage , matCB , matY, matCR , matResult;
+    private Mat grayscaleImage , matCB , matResult ,colormat;
 //    private Vector<Mat> chennl;//色彩通道
     private ArrayList<Mat> matList;
     private ArrayList<MatOfPoint> contours;
@@ -56,7 +56,8 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
         setpoly = new MatOfPoint2f();
         getpoly = new MatOfPoint2f();
 
-
+        //Todo test
+        colormat = new Mat();
     }
 
     @Override
@@ -71,21 +72,21 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
 
     @Override
     public Mat onCameraFrame(Mat mat) {
+        //順序關係  mat > colormat > matCB > matResult
+
+        Imgproc.cvtColor( mat , colormat , Imgproc.COLOR_RGB2YCrCb);
+        Core.split(colormat, matList); // 分離色彩通道 Y Cr Cb 分別進入 陣列 0、1、2
+        matCB = matList.get(2);
+        Imgproc.threshold(matCB , matResult ,144, 255,Imgproc.THRESH_BINARY);  //只取 CB值
+
+//        Imgproc.findContours(matResult, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE);
 
 
 
 
 
-
-
-
-        return mat;
+        return matResult;
     }
-
-
-
-
-
 
 
     //QR Tracker
