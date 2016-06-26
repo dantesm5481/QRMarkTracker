@@ -29,17 +29,19 @@ import opencv_view.BasicOpenCVView.BasicOpenCV;
  */
 public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.CvCameraViewListener {
 
-    private CascadeClassifier cascadeClassifier;
-    private Mat grayscaleImage , matCB , matResult ,colormat;
-//    private Vector<Mat> chennl;//色彩通道
+    private Mat   matCB , matResult ,colormat;
     private ArrayList<Mat> matList;
-    private ArrayList<MatOfPoint> contours;
-    private MatOfPoint2f setpoly ,getpoly;
-//    private Vector<MatOfPoint> poly;
+    private ArrayList<MatOfPoint> contours  ;
 
-    public QRTrackerView(Context context, int cameraId, Mat grayscaleImage) {
+    //todo test
+    private MatOfPoint temp;
+    private MatOfPoint2f approxCurve;
+    private int debug = 0;
+
+
+
+    public QRTrackerView(Context context, int cameraId) {
         super(context, cameraId);
-        this.grayscaleImage = grayscaleImage;
         this.setCvCameraViewListener(this);//加入監聽事件
         this.enableView();
     }
@@ -47,25 +49,22 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
     @Override
     public void onCameraViewStarted(int width, int height) {
 
-
-        grayscaleImage = new Mat( height , width , CvType.CV_8UC4);
         matResult = new Mat();
         contours = new ArrayList<MatOfPoint>();
 
         matList = new ArrayList<Mat>();
-        setpoly = new MatOfPoint2f();
-        getpoly = new MatOfPoint2f();
 
         //Todo test
         colormat = new Mat();
+        temp = new MatOfPoint();
+        approxCurve = new MatOfPoint2f();
     }
 
     @Override
     public void onCameraViewStopped() {
 
-//        grayscaleImage.release();
-//        matResult.release();
-//        matCB.release();
+        matResult.release();
+        matCB.release();
 
 
     }
@@ -74,51 +73,71 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
     public Mat onCameraFrame(Mat mat) {
         //順序關係  mat > colormat > matCB > matResult
 
-        Imgproc.cvtColor( mat , colormat , Imgproc.COLOR_RGB2YCrCb);
+        Imgproc.cvtColor(mat, colormat, Imgproc.COLOR_RGB2YCrCb);
         Core.split(colormat, matList); // 分離色彩通道 Y Cr Cb 分別進入 陣列 0、1、2
         matCB = matList.get(2);
-        Imgproc.threshold(matCB , matResult ,144, 255,Imgproc.THRESH_BINARY);  //只取 CB值
+        Imgproc.threshold(matCB, matResult, 144, 255, Imgproc.THRESH_BINARY);  //只取 CB值
 
-//        Imgproc.findContours(matResult, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE);
+        //提取四邊
+        Imgproc.findContours(matResult, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE,new Point());
+        SquareContours();
+//        Imgproc.Canny(matCB,matResult,80,120);  //邊緣檢測模式
 
 
 
-
-
+//        return mat;
         return matResult;
     }
 
+    private void SquareContours() {
+        if (!(contours.size() > 1000 || contours.size() < 150)) {
 
-    //QR Tracker
-    public Mat QRTrack(Mat mat){
+            for (int i = 0; i < contours.size(); i++) {
 
-        Imgproc.cvtColor( mat , grayscaleImage , Imgproc.COLOR_RGB2YCrCb);
-        Core.split(grayscaleImage , matList);// 分離色彩通道 Y Cr Cb 分別進入 陣列 0、1、2
-        matCB = matList.get(2); //
+                temp = contours.get(i);
+                MatOfPoint2f new_mat = new MatOfPoint2f(temp.toArray());
+                int contourSize = (int) temp.total();
+                Imgproc.approxPolyDP(new_mat, approxCurve, contourSize * 0.05, true);
+                if (approxCurve.total() == 4) { //取得四點
+                    if (Imgproc.isContourConvex(temp)) {//判斷是否為多邊形
+                        Log.v(" Raymond ", "  : " + " find the QRsquare"+String.valueOf(debug++));
+                        Imgproc.drawContours(matResult, contours, i, new Scalar(0, 255, 0), 8);
 
-        //CB通道二值化 ，最大值255
-        Imgproc.threshold(matCB , matResult ,144, 255,Imgproc.THRESH_BINARY);  //只取 CB值
-
-        //提取外輪廓
-        // todo 待理解  grayscaleImage的用法 ， point()的用法
-        //hierarchy 層級
-        Imgproc.findContours(matResult, contours, grayscaleImage, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE);
-
-        for (int i= 0 ; i< contours.size();i++){
-
-            double  eps = (double) contours.size()*0.05;
-            contours.get(i).convertTo(setpoly,CvType.CV_32FC2);
-            Imgproc.approxPolyDP( setpoly , getpoly , eps , true);
-
-            if (contours.size()== 4){
-                Imgproc.drawContours(grayscaleImage ,contours, i ,new Scalar(255));
-            }
-
-        }
-
-
-        return mat;
+                    }
+                }}}
     }
+
+
+    //QR Tracker//todo JACK way
+//    public Mat QRTrack(Mat mat){
+//
+//        Imgproc.cvtColor( mat , grayscaleImage , Imgproc.COLOR_RGB2YCrCb);
+//        Core.split(grayscaleImage , matList);// 分離色彩通道 Y Cr Cb 分別進入 陣列 0、1、2
+//        matCB = matList.get(2); //
+//
+//        //CB通道二值化 ，最大值255
+//        Imgproc.threshold(matCB , matResult ,144, 255,Imgproc.THRESH_BINARY);  //只取 CB值
+//
+//        //提取外輪廓
+//        // todo 待理解  grayscaleImage的用法 ， point()的用法
+//        //hierarchy 層級
+//        Imgproc.findContours(matResult, contours, grayscaleImage, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE);
+//
+//        for (int i= 0 ; i< contours.size();i++){
+//
+//            double  eps = (double) contours.size()*0.05;
+//            contours.get(i).convertTo(setpoly,CvType.CV_32FC2);
+//            Imgproc.approxPolyDP( setpoly , getpoly , eps , true);
+//
+//            if (contours.size()== 4){
+//                Imgproc.drawContours(grayscaleImage ,contours, i ,new Scalar(255));
+//            }
+//
+//        }
+//
+//
+//        return mat;
+//    }
 
 
 

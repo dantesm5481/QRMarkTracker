@@ -23,7 +23,7 @@ public class Activity_QRTracker extends BasicActivity{
 
         try {
 
-            trackerView = new QRTrackerView(this, -1, new Mat());
+            trackerView = new QRTrackerView(this, -1);
             setContentView(trackerView);
 
             Toast.makeText(this ,"成功進入 openCV Camera",Toast.LENGTH_LONG).show();
