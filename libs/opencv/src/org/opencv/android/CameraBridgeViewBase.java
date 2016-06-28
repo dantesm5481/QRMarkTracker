@@ -449,7 +449,6 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
 
                 //todo FPS 速度待提高
                 if (mScale != 0) {
-                    Log.v("Raymomnd ", " Bridage_canvas :"+String.valueOf(up_times++));
                     canvas.drawBitmap(mCacheBitmap, new Rect(0,0,mCacheBitmap.getWidth(), mCacheBitmap.getHeight()),
                          new Rect((int)((canvas.getWidth() - mScale*mCacheBitmap.getWidth()) / 2),
                          (int)((canvas.getHeight() - mScale*mCacheBitmap.getHeight()) / 2),
