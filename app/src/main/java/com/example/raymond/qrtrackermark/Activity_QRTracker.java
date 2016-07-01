@@ -7,6 +7,7 @@ import com.example.raymond.qrtrackermark.basic_view_activity.BasicActivity;
 
 import org.opencv.core.Mat;
 
+import opencv_view.MarkerViewrToQR;
 import opencv_view.QRTrackerView;
 
 /**
@@ -16,6 +17,7 @@ public class Activity_QRTracker extends BasicActivity{
 
 
     QRTrackerView trackerView;
+    MarkerViewrToQR markerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,8 @@ public class Activity_QRTracker extends BasicActivity{
         try {
 
             trackerView = new QRTrackerView(this, -1);
-            setContentView(trackerView);
+            markerView = new MarkerViewrToQR(this,-1);
+            setContentView(markerView);
 
             Toast.makeText(this ,"成功進入 openCV Camera",Toast.LENGTH_LONG).show();
 

@@ -21,8 +21,9 @@ public class BasicOpenCV extends JavaCameraView  {
         else{ Log.v("Raymond", "  :" + "OpenCV library is ready");}
     }
 
-    public BasicOpenCV(Context context, int cameraId) {
-        super(context, cameraId);
+    public BasicOpenCV(Context context, int cameraId){
+            super(context, cameraId);
+            this.enableView();
     }
     public void LoaderCallBack(){
 

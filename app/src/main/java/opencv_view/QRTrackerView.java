@@ -24,6 +24,7 @@ import org.opencv.core.Scalar;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
+import org.opencv.utils.Converters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +40,13 @@ import qr_scanner.QRgenerate;
  */
 public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.CvCameraViewListener {
 
-    private Mat   matCB , matResult ,colormat;
+    private Mat   matCB , matResult ,colormat , finalmat;
     private ArrayList<Mat> matList;
     private ArrayList<MatOfPoint> contours  ;
 
     // final element
     private MatOfPoint temp;
     private MatOfPoint2f approxCurve;
-    private int debug = 0;
 
 
     public QRTrackerView(Context context, int cameraId) {
@@ -59,6 +59,7 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
     public void onCameraViewStarted(int width, int height) {
 
         matResult = new Mat();
+
         contours = new ArrayList<MatOfPoint>();
         matList = new ArrayList<Mat>();
 
@@ -66,7 +67,7 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
         colormat = new Mat();
         temp = new MatOfPoint();
         approxCurve = new MatOfPoint2f();
-
+        finalmat = new Mat();
 
     }
 
@@ -78,7 +79,6 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
         colormat.release();
         this.releaseCamera();
 
-
     }
 
     @Override
@@ -87,25 +87,23 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
         Imgproc.cvtColor(mat, colormat, Imgproc.COLOR_RGB2YCrCb);
         Core.split(colormat, matList); // 分離色彩通道 Y Cr Cb 分別進入 陣列 0、1、2
         matCB = matList.get(2);
-        Imgproc.threshold(matCB, matResult, 144, 255, Imgproc.THRESH_BINARY);  //只取 CB值
-
-
+        Imgproc.threshold(matCB, matResult, 129, 255, Imgproc.THRESH_BINARY);  //只取 CB值
 
         //todo 提取四邊
         Imgproc.findContours(matResult, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_NONE);
+
+//        Log.v(" Raymond ", "   Size :" + String.valueOf(contours.size()));
 //        pointsize();
-        Log.v(" Raymond ",  "   Size :" +String.valueOf( contours.size()));
-        SquareContours();
 
 
-//        SquareContours();
+
 //        Imgproc.Canny(matCB,matResult,80,120);  //邊緣檢測模式
 
 
-
-        return mat;
-//        return matResult;
+//        return mat;
+        return matResult;
     }
+
 
     private void pointsize(){
         if (!(contours.size() > 1000 || contours.size() < 150)) {
@@ -119,44 +117,53 @@ public class QRTrackerView extends BasicOpenCV implements CameraBridgeViewBase.C
     private void SquareContours() {
 
             for (int i = 0; i < contours.size(); i++) {
+
                 temp = contours.get(i);
+
                 MatOfPoint2f new_mat = new MatOfPoint2f(temp.toArray());
                 int contourSize = (int) temp.total();
-                Imgproc.approxPolyDP(new_mat, approxCurve , contourSize * 0.05, true);
+
+                Imgproc.approxPolyDP(new_mat, approxCurve, contourSize * 0.05, true);
+
                 if (approxCurve.total() == 4) { //取得四點
                     if (Imgproc.isContourConvex(temp)) {//判斷是否為多邊形
                         Imgproc.drawContours(matResult, contours, i, new Scalar(0, 255, 0), 8);
-                        Log.v(" Raymond ", "  approxCurve || is ContourContex == ture : ");
-//                        getMat2Image();
+//                        wrapImage();
+                        Log.v("  Raymond ","  square contours down");
                     }
                 }}
     }
 
 
+    private void wrapImage(){
 
 
 
+        Mat mat  = Imgproc.getPerspectiveTransform(matResult , finalmat);
+        Mat m  = new Mat();
+//        Core.perspectiveTransform(startM ,endM ,m );
+        Imgproc.warpPerspective(matResult, finalmat, m, matResult.size());
+        Log.v("  Raymond ", "  wrap Image");
+//        getMat2Image(finalmat);
 
-    private void getMat2Image(){
 
-        Bitmap bm = Bitmap.createBitmap(matResult.cols(), matResult.rows(),Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(matResult, bm);// Mat convert to Bitmap
+    }
+
+    private void getMat2Image(Mat mat){
+
+        Bitmap bm = Bitmap.createBitmap(mat.cols(), mat.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(mat , bm);// Mat convert to Bitmap
         // todo test bitmap  pic from drawable
 //        Bitmap bm = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.abc1002);
-
+        Log.v("  Raymond ", "  getMat2Image ");
         try{
             String s = QRHelper.getReult(bm);
             Log.v(" Raymond ","  QRHelp  :"+ s);
         }catch (Exception e){
-            Log.v(" Raymond ","  QRHelp Exception :"+"  times"+String.valueOf(debug) +"  :  "+e.getMessage());
+            e.printStackTrace();
         }
     }
 
 
 
-    private ImageView setImageViewonMat(){
-
-        ImageView result = new ImageView(getContext());
-        return result;
-    }
 }
